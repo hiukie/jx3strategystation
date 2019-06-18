@@ -1,4 +1,4 @@
-<%--
+<%@ page import="top.yzlin.jx3strategystation.entity.user.Admin" %><%--
   Created by IntelliJ IDEA.
   User: yzlin
   Date: 2019/4/13
@@ -32,24 +32,30 @@
                     <li><s:a action="register" namespace="/user">注册</s:a></li>
                 </c:if>
                 <c:if test="${sessionScope.user != null}">
+                    <c:choose>
+                        <c:when test="${requestScope.actionName eq 'CommonAction'}">
+                            <li><s:a action="common" namespace="/commit">发帖</s:a></li>
+                        </c:when>
+
+                        <c:when test="${requestScope.actionName eq 'StrategyAction'}">
+                            <li><s:a action="strategy" namespace="/commit">发帖</s:a></li>
+                        </c:when>
+
+                        <c:when test="${requestScope.actionName eq 'TradingAction'}">
+                            <li><s:a action="trading" namespace="/commit">发帖</s:a></li>
+                        </c:when>
+                    </c:choose>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
                                 ${sessionScope.user.nickName}<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">个人信息</a></li>
-                            <li><a href="#">个人中心</a></li>
-                            <li><a href="#">消息</a></li>
-                            <c:if test="${requestScope.cActionName eq 'CommonAction'}">
-                                <li><s:a action="commitCommon">发帖</s:a></li>
+                            <c:if test='<%= session.getAttribute("user") instanceof Admin%>'>
+                                <li><s:a namespace="/admin" action="reviewArticle">管理员界面</s:a></li>
+                                <li><s:a namespace="/commit" action="announcement">公告发布</s:a></li>
                             </c:if>
-                            <c:if test="${requestScope.sActionName eq 'StrageAction'}">
-                                <li><s:a action="commitStrategy">发帖</s:a></li>
-                            </c:if>
-                            <c:if test="${requestScope.tActionName eq 'TradingAction'}">
-                                <li><s:a action="commitTrading">发帖</s:a></li>
-                            </c:if>
+                            <li><s:a namespace="/user" action="personalHomepage">个人中心</s:a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="" data-toggle="modal" data-target="#myModal1">修改密码</a></li>
                             <li><a onclick="logOut()">退出登录</a></li>
@@ -57,13 +63,7 @@
                     </li>
                 </c:if>
             </ul>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="查找">
-                </div>
-                <button type="submit" class="btn btn-default" style="font-size: 20px"><span
-                        class="glyphicon glyphicon-zoom-in"></span></button>
-            </form>
+
         </div>
     </div>
 </nav>

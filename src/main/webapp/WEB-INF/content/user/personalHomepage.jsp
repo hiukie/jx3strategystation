@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/static/css/userCss/personalStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/userCss/personalStyle.css">
     <jsp:include page="../templates/bootstarp-lib.jsp"/>
 </head>
 <body>
@@ -18,14 +18,49 @@
     <div class="content">
         <div class="content-left">
             <div class="avatar">
-                <img src="" alt="">
+                <img src="${sessionScope.user.portrait}" alt="">
             </div>
         </div>
         <div class="content-right">
             <ul class="nav nav-tabs">
-                <li role="presentation"><a href="#posting" data-toggle="tab" role="tab">帖子管理</a></li>
                 <li role="presentation"><a href="#profile" data-toggle="tab" role="tab">个人信息</a></li>
+                <li role="presentation"><a href="#posting" data-toggle="tab" role="tab">帖子管理</a></li>
             </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="profile">
+                    <div class="show2">
+                        <form class="form-horizontal ">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">昵称:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static">${sessionScope.user.nickName}</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户名:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static">${sessionScope.user.userName}</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">邮箱:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static">${sessionScope.user.mail}</p>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="posting">
+                    <div>
+                        <jsp:include page="../user/tableModel.jsp"/>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

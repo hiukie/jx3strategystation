@@ -28,7 +28,7 @@
 <div class="container">
     <div class="page-header">
         <h1>攻略社区
-            <small>最近要吃土</small>
+            <small>这都不会？去百度啊</small>
         </h1>
     </div>
 

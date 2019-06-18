@@ -1,6 +1,7 @@
 package top.yzlin.jx3strategystation.dao;
 
 import top.yzlin.jx3strategystation.database.OperateQuery;
+import top.yzlin.jx3strategystation.database.annotation.Delete;
 import top.yzlin.jx3strategystation.database.annotation.QueryParam;
 import top.yzlin.jx3strategystation.database.annotation.Save;
 import top.yzlin.jx3strategystation.database.annotation.Select;
@@ -33,9 +34,15 @@ public interface ArticleDAO {
     @Select("from TradingArticle")
     List<TradingArticle> findTradingArticle();
 
-    @Select("from AnnouncementArticle")
-    List<AnnouncementArticle> findAnnouncementArticle();
+    @Select("from AnnouncementArticle where instance=:instance")
+    List<AnnouncementArticle> findAnnouncementArticleByInstance(@QueryParam("instance") String instance);
 
     @Select("from CommonArticle")
     List<CommonArticle> findCommonArticle();
+
+    @Delete("from BaseArticle where articleId=:articleId")
+    void deleteArticleById(@QueryParam("articleId") int id);
+
+    @Select("from BaseArticle where user.userId=:userId")
+    List<BaseArticle> findArticleByUserId(@QueryParam("userId") int userId);
 }

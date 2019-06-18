@@ -12,7 +12,7 @@
     <title>攻略区</title>
     <jsp:include page="../templates/base-lib.jsp"/>
     <style>
-        .imgm1{
+        .imgm1 {
             width: 100%;
             padding-left: 10px;
             height: 100%;
@@ -27,7 +27,7 @@
             color: black;
         }
 
-        .linkl{
+        .linkl {
             font-size: 35px;
             text-align: center;
             padding-bottom: 0px;
@@ -67,7 +67,7 @@
         </div>
 
         <div class="col-sm-10" style="height: 100%; background-color: #edefea">
-            <img src="/static/img/community/glz.png">
+            <img src="${pageContext.request.contextPath}/static/img/community/glz.png" alt="攻略站">
             <ul class="list-group">
                 <c:forEach items="${requestScope.strategyList}" var="article">
                     <li class="list-group-item db1">
